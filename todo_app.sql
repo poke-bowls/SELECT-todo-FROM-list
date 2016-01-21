@@ -28,3 +28,25 @@ updated_at timestamp,
 completed boolean NOT NULL DEFAULT false
 );
 
+-- 8 accomplish the following
+--   i remove column named 'completed'
+--   ii add a column to 'tasks' named 'completed_at' : timestamp, may be NULL, has a default value of NULL
+--   iii change 'updated_at' column to not allow NULL values, and have a default vale of 'now()'
+--   iv create a new task by only setting values ()
+--   v create a new task
+
+ALTER TABLE tasks
+  DROP COLUMN completed,
+  ADD COLUMN completed_at timestamp NULL,
+  ALTER COLUMN completed_at SET DEFAULT NULL,
+  ALTER COLUMN updated_at SET NOT NULL,
+  ALTER COLUMN updated_at SET DEFAULT now();
+
+INSERT INTO tasks VALUES ( default, 'Study SQL', 'Complete this exercise', now(), now(), NULL );
+INSERT INTO tasks VALUES ( default, 'Study PostgreSQL', 'Read all the documentation' );
+
+SELECT title FROM tasks WHERE completed_at IS NULL;
+
+UPDATE tasks SET completed_at = now() WHERE title = 'Study SQL';
+
+SELECT title, description FROM tasks WHERE completed_at IS NULL;

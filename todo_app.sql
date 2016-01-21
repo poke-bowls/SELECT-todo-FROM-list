@@ -28,12 +28,7 @@ updated_at timestamp,
 completed boolean NOT NULL DEFAULT false
 );
 
--- 8 accomplish the following
---   i remove column named 'completed'
---   ii add a column to 'tasks' named 'completed_at' : timestamp, may be NULL, has a default value of NULL
---   iii change 'updated_at' column to not allow NULL values, and have a default vale of 'now()'
---   iv create a new task by only setting values ()
---   v create a new task
+-- 8
 
 ALTER TABLE tasks
   DROP COLUMN completed,
@@ -50,3 +45,19 @@ SELECT title FROM tasks WHERE completed_at IS NULL;
 UPDATE tasks SET completed_at = now() WHERE title = 'Study SQL';
 
 SELECT title, description FROM tasks WHERE completed_at IS NULL;
+
+SELECT * FROM tasks ORDER BY created_at DESC;
+
+INSERT INTO tasks VALUES ( default, 'mistake 1', 'a test entry' );
+INSERT INTO tasks VALUES ( default, 'mistake 2', 'another test entry' );
+INSERT INTO tasks VALUES ( default, 'third mistake', 'another test entry' );
+
+SELECT title FROM tasks WHERE title LIKE '%mistake%';
+
+DELETE FROM tasks WHERE title = 'mistake 1';
+
+SELECT title, description FROM tasks WHERE title LIKE '%mistake%';
+
+DELETE FROM tasks WHERE title LIKE '%mistake%';
+
+SELECT * FROM tasks ORDER BY title ASC;

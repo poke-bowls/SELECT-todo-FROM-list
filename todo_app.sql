@@ -11,3 +11,20 @@ DROP DATABASE IF EXISTS todoapp;
 -- 4 create a database named todoapp
 CREATE DATABASE todoapp;
 
+-- 5 connect to the newly created database
+\c todoapp
+
+DROP TABLE IF EXISTS tasks;
+-- 6 create a table named 'tasks'
+-- 7 define column 'id' as the table's primary key
+
+CREATE TABLE tasks
+(
+id serial PRIMARY KEY NOT NULL,
+title varchar(255) NOT NULL,
+description text,
+created_at timestamp NOT NULL DEFAULT now(),
+updated_at timestamp,
+completed boolean NOT NULL DEFAULT false
+);
+
